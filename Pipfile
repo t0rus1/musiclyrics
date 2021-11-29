@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+streamlit = "*"
+google-cloud-firestore = "*"
+google-auth-oauthlib = "*"
+youtube-dl = "*"
+bs4 = "*"
+requests = "*"
+streamlit-player = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
