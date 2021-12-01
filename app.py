@@ -1,4 +1,4 @@
-from os import name
+import os
 import streamlit as st
 import re, requests, subprocess, urllib.parse, urllib.request
 from bs4 import BeautifulSoup
@@ -10,7 +10,15 @@ import downloader
 
 DEFAULT_PAGE_SIZE=20
 
-def set_page():
+def init_folders():
+    ''' ensure needed folders exist'''
+    try:
+        os.mkdir('./temp')
+    except OSError as error:
+        print(error)
+
+def setup_page():
+    ''' streamlit page config, app title etc'''
     st.set_page_config(
         page_title = "Music and Lyrics",
         layout="wide",
@@ -20,8 +28,11 @@ def set_page():
             "About": "Music & Lyrics app, by Leon van Dyk 2021"
         }
     )
+    st.title('Music and Lyrics 🎶')
+    st.subheader("Search Youtube for Music, then pair with lyrics and translation!")
 
 def name_and_args():
+    ''' inspect function arguments '''
     caller = inspect.stack()[1][0]
     args, _, _, values = inspect.getargvalues(caller)
     return [(i, values[i]) for i in args]
@@ -69,6 +80,7 @@ def get_youtube_titles(search_results, page_size): #, prog_bar):
 #     #st_player(yt_urls[chosen])
 
 def search_form_callback():
+    ''' executed when form is submitted and before re-run '''
     chosen_title = st.session_state.title_radio
     download_url = st.session_state.yt_urls[chosen_title]
     with st.spinner(f'downloading audio for {chosen_title}'):
@@ -82,9 +94,8 @@ def search_form_callback():
 
 ###################################
 # START with a search box and button
-set_page()
-st.title('Music and Lyrics 🎶')
-st.subheader("Search Youtube for Music, then pair with lyrics and translation!")
+init_folders()
+setup_page()
 
 #get help on any widget this way
 #st.help(st.selectbox)
