@@ -11,6 +11,7 @@ youtube-dl = "*"
 bs4 = "*"
 requests = "*"
 streamlit-player = "*"
+pafy = "*"
 
 [dev-packages]
 
