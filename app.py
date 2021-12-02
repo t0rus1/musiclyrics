@@ -30,7 +30,7 @@ def setup_page():
             "About": "Music & Lyrics app, by Leon van Dyk 2021"
         }
     )
-    st.title('Music and Lyrics 🎶')
+    st.title('Music and Lyrics v 0.1🎶')
     st.subheader("Search Youtube for Music, then pair with lyrics and translation!")
 
 def name_and_args():
@@ -97,7 +97,7 @@ def search_form_callback():
     if not most_recently_download:
         with st.spinner(f"Downloading and extracting audio from '{chosen_title}' youtube video ..."):
             placeholder = st.empty()
-            completion_state = downloader.download(download_url, placeholder)
+            completion_state = downloader.retrieve(download_url, placeholder)
             if completion_state is not None:
                 if isinstance(completion_state, DownloadError):
                     st.error(f'This video ({chosen_title}) may only being played on Youtube itself')

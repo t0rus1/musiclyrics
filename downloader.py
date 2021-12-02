@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 import streamlit as st
 import youtube_dl
 
-
 class MyLogger(object):
     def debug(self, msg):
         pass
@@ -12,7 +11,6 @@ class MyLogger(object):
 
     def error(self, msg):
         print(msg)
-
 
 def my_hook(d):   
     if d['status'] == 'finished': # could alo be 'downloading' or 'error'
@@ -46,7 +44,7 @@ ydl_opts = {
     #'max_filesize': 10*1024*1024
 }
 
-def download(url, placeholder):
+def retrieve(url, placeholder):
     ''' use youtube_dl to download video 
         http://www.youtube.com/watch?v=nrGk0AuFd_9
         or
@@ -54,6 +52,7 @@ def download(url, placeholder):
 
         regex like so 
         /^[A-Za-z0-9_-]{11}$/
+        
     '''
 
     ydl_opts['placeholder'] = placeholder
